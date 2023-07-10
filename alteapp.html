@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagina HTML con codice Python</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Pagina HTML con codice Python</h1>
+
+    <div class="code-editor">
+      <pre><code class="language-python">
+from cryptography.fernet import Fernet
+
+# Genera una chiave casuale
+key = Fernet.generate_key()
+
+# Crea un oggetto Fernet con la chiave generata
+cipher = Fernet(key)
+
+# Dati da crittografare
+data = b"Il mio messaggio segreto"
+
+# Crittografa i dati
+encrypted_data = cipher.encrypt(data)
+
+print("Dati crittografati:", encrypted_data)
+
+# Decrittografa i dati
+decrypted_data = cipher.decrypt(encrypted_data)
+
+print("Dati decrittografati:", decrypted_data)
+      </code></pre>
+    </div>
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
