@@ -83,7 +83,8 @@ if __name__ == '__main__':
     app.run()</code></pre>
     </div>
 
-    <p>Di seguito è riportato il secondo programma Python Flask con un paragrafo di commento:</p>
+    <p>Il secondo programma è simile al primo, con l'unica differenza che oltre a registrare il cookie con lo username dell'utente, registra anche la data dell'ultimo accesso. Da notare:
+    siccome per leggere il cookie  viene chiamato il metodo get di session. Questa richiede una chiave segreta per firmare la sessione.</p>
 
     <div class="code-editor">
       <pre><code class="language-python">from flask import Flask, request, make_response, render_template, session
