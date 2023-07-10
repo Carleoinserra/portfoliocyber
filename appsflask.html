@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagina HTML con codice Flask</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <style>
     .code-editor {
       background-color: #f5f5f5;
@@ -13,98 +14,172 @@
   </style>
 </head>
 <body>
-  <h1>Pagina HTML con codice Flask</h1>
+  <div class="container">
+    <h1>Pagina HTML con codice Flask</h1>
 
-  <p>Di seguito è riportato il primo programma Python Flask con un paragrafo di commento:</p>
+    <p>Di seguito è riportato il primo programma Python Flask con un paragrafo di commento:</p>
 
-  <div class="code-editor">
-    <pre>
-      <code>
-        from flask import Flask, request, make_response, render_template
+    <div class="code-editor">
+      <pre><code class="language-python">from flask import Flask, request, make_response, render_template
 
-        app = Flask(__name__)
+app = Flask(__name__)
 
-        @app.route('/')
-        def index():
-            username = request.cookies.get('username')
-            if username:
-                return f'Ciao {username}! Benvenuto di nuovo.'
-            else:
-                return render_template('login.html')
+@app.route('/')
+def index():
+    username = request.cookies.get('username')
+    if username:
+        return f'Ciao {username}! Benvenuto di nuovo.'
+    else:
+        return render_template('login.html')
 
-        @app.route('/login', methods=['POST'])
-        def login():
-            username = request.form.get('username')
-            if username:
-                response = make_response(f'Login effettuato come {username}.')
-                response.set_cookie('username', username)
-                return response
-            else:
-                return 'Nome utente mancante. Impossibile effettuare il login.'
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form.get('username')
+    if username:
+        response = make_response(f'Login effettuato come {username}.')
+        response.set_cookie('username', username)
+        return response
+    else:
+        return 'Nome utente mancante. Impossibile effettuare il login.'
 
-        @app.route('/logout')
-        def logout():
-            response = make_response('Logout effettuato.')
-            response.set_cookie('username', '', expires=0)
-            return response
+@app.route('/logout')
+def logout():
+    response = make_response('Logout effettuato.')
+    response.set_cookie('username', '', expires=0)
+    return response
 
-        # Questo codice Flask crea un'applicazione web con una rotta '/'
-        # che restituisce un messaggio di benvenuto all'utente se il
-        # cookie 'username' è presente. In caso contrario, reindirizza
-        # all'HTML di login.
+# Questo codice Flask crea un'applicazione web con una rotta '/'
+# che restituisce un messaggio di benvenuto all'utente se il
+# cookie 'username' è presente. In caso contrario, reindirizza
+# all'HTML di login.
 
-        if __name__ == '__main__':
-            app.run()
-      </code>
-    </pre>
-  </div>
+if __name__ == '__main__':
+    app.run()</code></pre>
+    </div>
 
-  <p>Di seguito è riportato il secondo programma Python Flask con un paragrafo di commento:</p>
+    <p>Di seguito è riportato il secondo programma Python Flask con un paragrafo di commento:</p>
 
-  <div class="code-editor">
-    <pre>
-      <code>
-        from flask import Flask, request, make_response, render_template, session
-        from datetime import datetime
+    <div class="code-editor">
+      <pre><code class="language-python">from flask import Flask, request, make_response, render_template, session
+from datetime import datetime
 
-        app = Flask(__name__)
-        app.secret_key = 'supersecretkey'  # Chiave segreta per firmare la sessione
+app = Flask(__name__)
+app.secret_key = 'supersecretkey'  # Chiave segreta per firmare la sessione
 
-        @app.route('/')
-        def index():
-            username = session.get('username')
-            last_access = session.get('last_access')
-            if username:
-                return f'Ciao {username}! Ultimo accesso: {last_access}'
-            else:
-                return render_template('login.html')
+@app.route('/')
+def index():
+    username = session.get('username')
+    last_access = session.get('last_access')
+    if username:
+        return f'Ciao {username}! Ultimo accesso: {last_access}'
+    else:
+        return render_template('login.html')
 
-        @app.route('/login', methods=['POST'])
-        def login():
-            username = request.form.get('username')
-            if username:
-                session['username'] = username
-                session['last_access'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                return f'Login effettuato come {username}.'
-            else:
-                return 'Nome utente mancante. Impossibile effettuare il login.'
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form.get('username')
+    if username:
+        session['username'] = username
+        session['last_access'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        return f'Login effettuato come {username}.'
+    else:
+        return 'Nome utente mancante. Impossibile effettuare il login.'
 
-        @app.route('/logout')
-        def logout():
-            session.pop('username', None)
-            session.pop('last_access', None)
-            return 'Logout effettuato.'
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('last_access', None)
+    return 'Logout effettuato.'
 
-        # Questo codice Flask crea un'applicazione web con una rotta '/'
-        # che restituisce un messaggio di benvenuto all'utente se l'username
-        # è presente nella sessione. In caso contrario, reindirizza
-        # all'HTML di login.
+# Questo codice Flask crea un'applicazione web con una rotta '/'
+# che restituisce un messaggio di benvenuto all'utente se l'username
+# è presente nella sessione. In caso contrario, reindirizza
+# all'HTML di login.
 
-        if __name__ == '__main__':
-            app.run()
-      </code>
-    </pre>
-  </div>
+if __name__ == '__main__':
+    app.run()</code></pre>
+    </div>
+
+    <p>Di seguito è riportato il terzo programma Python Flask con un paragrafo di commento:</p>
+
+    <div class="code-editor">
+      <pre><code class="language-python">from flask import Flask, request, render_template, session
+from datetime import datetime
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+import mysql.connector
+
+# Configurazione del database MySQL
+db_config = {
+    'user': 'root',
+    'password': '',
+    'host': 'localhost',
+    'database': 'mydatabase',
+    'raise_on_warnings': True
+}
+
+app = Flask(__name__)
+app.secret_key = 'supersecretkey'  # Chiave segreta per firmare la sessione
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('last_access', None)
+    return 'Logout effettuato.'
+
+@app.route('/accessi')
+def accessi():
+    access_dates = get_access_dates()  # Ottiene le date di accesso dal database
+    return render_template('accessi.html', access_dates=access_dates)
+
+@app.route('/istogramma')
+def istogramma():
+    access_dates = get_access_dates()  # Ottiene le date di accesso dal database
+    plt.hist(access_dates, bins=10)  # Crea un istogramma con 10 bin
+    plt.xlabel('Data di accesso')
+    plt.ylabel('Frequenza')
+    plt.title('Istogramma degli accessi')
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')  # Salva il grafico su un buffer
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.getvalue()).decode()  # Converti l'immagine in base64
+    plt.close()
+    return render_template('istogramma.html', image_base64=image_base64)
+
+def save_access(username, access_date):
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+        insert_query = "INSERT INTO accessi (username, access_date) VALUES (%s, %s)"
+        data = (username, access_date)
+        cursor.execute(insert_query, data)
+        connection.commit()
+        cursor.close()
+        connection.close()
+    except mysql.connector.Error as error:
+        print("Errore durante il salvataggio dell'accesso nel database:", error)
+
+def get_access_dates():
+    access_dates = []
+    try:
+        connection = mysql.connector.connect(**db_config)
+        cursor = connection.cursor()
+        select_query = "SELECT access_date FROM accessi"
+        cursor.execute(select_query)
+        rows = cursor.fetchall()
+        for row in rows:
+            access_dates.append(row[0])
+        cursor.close()
+        connection.close()
+        return access_dates
+    except mysql.connector.Error as error:
+        print("Errore durante il recupero delle date di accesso dal database:", error)
+        return access_dates
+
+if __name__ == '__main__':
+    app.run()</code></pre>
+    </div>
 
 </body>
 </html>
