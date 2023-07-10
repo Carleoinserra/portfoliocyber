@@ -32,23 +32,7 @@
 <p>
 Di seguito la spiegazione del primo programma in cui si esegue una crittografia a chiave simmetrica:
 
-from cryptography.fernet import Fernet: Importa la classe Fernet dal modulo cryptography.fernet. Fernet è una classe che fornisce implementazioni per crittografare e decrittografare dati utilizzando l'algoritmo di crittografia Fernet.
 
-key = Fernet.generate_key(): Genera una chiave casuale utilizzata per crittografare e decrittografare i dati. La chiave generata sarà un oggetto di tipo bytes.
-
-cipher = Fernet(key): Crea un oggetto Fernet utilizzando la chiave generata. Questo oggetto verrà utilizzato per crittografare e decrittografare i dati.
-
-data = b"Il mio messaggio segreto": Definisce i dati da crittografare. In questo caso, viene utilizzata una stringa in formato di byte.
-
-encrypted_data = cipher.encrypt(data): Crittografa i dati utilizzando l'oggetto Fernet creato in precedenza. Il risultato crittografato sarà un oggetto di tipo bytes.
-
-print("Dati crittografati:", encrypted_data): Stampa i dati crittografati.
-
-decrypted_data = cipher.decrypt(encrypted_data): Decrittografa i dati crittografati utilizzando l'oggetto Fernet. Il risultato decrittografato sarà un oggetto di tipo bytes.
-
-print("Dati decrittografati:", decrypted_data): Stampa i dati decrittografati.
-
-Questo codice illustra un esempio di crittografia e decrittografia utilizzando l'algoritmo Fernet. La crittografia simmetrica consente di crittografare e decrittografare i dati utilizzando la stessa chiave.
 
 
 
@@ -56,6 +40,17 @@ Questo codice illustra un esempio di crittografia e decrittografia utilizzando l
 
   
 </p>
+
+  <ul>
+  <li><strong>from cryptography.fernet import Fernet:</strong> Importa la classe Fernet dal modulo cryptography.fernet. Fernet è una classe che fornisce implementazioni per crittografare e decrittografare dati utilizzando l'algoritmo di crittografia Fernet.</li>
+  <li><strong>key = Fernet.generate_key():</strong> Genera una chiave casuale utilizzata per crittografare e decrittografare i dati. La chiave generata sarà un oggetto di tipo bytes.</li>
+  <li><strong>cipher = Fernet(key):</strong> Crea un oggetto Fernet utilizzando la chiave generata. Questo oggetto verrà utilizzato per crittografare e decrittografare i dati.</li>
+  <li><strong>data = b"Il mio messaggio segreto":</strong> Definisce i dati da crittografare. In questo caso, viene utilizzata una stringa in formato di byte.</li>
+  <li><strong>encrypted_data = cipher.encrypt(data):</strong> Crittografa i dati utilizzando l'oggetto Fernet creato in precedenza. Il risultato crittografato sarà un oggetto di tipo bytes.</li>
+  <li><strong>print("Dati crittografati:", encrypted_data):</strong> Stampa i dati crittografati.</li>
+  <li><strong>decrypted_data = cipher.decrypt(encrypted_data):</strong> Decrittografa i dati crittografati utilizzando l'oggetto Fernet. Il risultato decrittografato sarà un oggetto di tipo bytes.</li>
+  <li><strong>print("Dati decrittografati:", decrypted_data):</strong> Stampa i dati decrittografati.</li>
+</ul>
     <div class="code-editor">
       <pre><code class="language-python">
 from cryptography.fernet import Fernet
