@@ -27,7 +27,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="index.html">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Argomenti Cyber</a>
@@ -41,11 +41,11 @@
       </ul>
     </div>
   </nav>  <div class="container">
-    <h1>Pagina HTML con codice Flask</h1>
+    <h1>Applicazioni flask che utilizzano i cookies</h1>
 
-    <p>Di seguito è riportato il primo programma Python Flask con un paragrafo di commento:</p>
-
-    <div class="code-editor">
+    <p>Negli esempi sotto riportati, vediamo applicazioni flask che utilizzano la tecnologia dei cookies:</p>
+<p>Nel primo esempio una semplice applicazione che chiede all'utente di inserire lo username (se questo è già registrato nel cookie il porogramma stampa un saluto, altrimenti va a registrare 
+  un nuovo utente con il relativo cookie:</p>    <div class="code-editor">
       <pre><code class="language-python">from flask import Flask, request, make_response, render_template
 
 app = Flask(__name__)
