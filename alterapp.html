@@ -31,14 +31,6 @@
     <h1>Sistemi di crittografia con l'utilizzo di Python</h1>
 <p>
 Di seguito la spiegazione del primo programma in cui si esegue una crittografia a chiave simmetrica:
-
-
-
-
-
-
-
-  
 </p>
 
   <ul>
@@ -75,8 +67,79 @@ decrypted_data = cipher.decrypt(encrypted_data)
 print("Dati decrittografati:", decrypted_data)
       </code></pre>
     </div>
-  </div>
+  
+<p>
+Di seguito la spiegazione del primo programma in cui si esegue una crittografia a chiave asimmetrica:
+</p>  
+  <ul>
+  <li><strong>Importa la classe rsa dal modulo cryptography.hazmat.primitives.asymmetric.</strong> Questa classe fornisce funzionalità per la generazione di chiavi RSA.</li>
+  <li><strong>Importa i moduli serialization e hashes dal modulo cryptography.hazmat.primitives.</strong> Questi moduli forniscono funzionalità per la serializzazione delle chiavi e l'utilizzo di funzioni hash.</li>
+  <li><strong>Importa il modulo padding dal modulo cryptography.hazmat.primitives.asymmetric.</strong> Questo modulo fornisce funzionalità per il padding utilizzato nella crittografia asimmetrica.</li>
+  <li>Genera una chiave privata RSA utilizzando la funzione generate_private_key del modulo rsa. La chiave privata avrà una dimensione di 2048 bit e un esponente pubblico di 65537.</li>
+  <li>Ottiene la chiave pubblica corrispondente alla chiave privata generata.</li>
+  <li>Converte la chiave privata in formato PEM utilizzando la funzione private_bytes del modulo serialization. La chiave privata verrà codificata utilizzando l'encoding PEM, nel formato PKCS8 e senza alcun algoritmo di crittografia.</li>
+  <li>Converte la chiave pubblica in formato PEM utilizzando la funzione public_bytes del modulo serialization. La chiave pubblica verrà codificata utilizzando l'encoding PEM e nel formato SubjectPublicKeyInfo.</li>
+  <li>Definisce i dati da crittografare. In questo caso, viene utilizzata una stringa in formato di byte.</li>
+  <li>Crittografa i dati utilizzando la chiave pubblica. Viene utilizzato il padding OAEP (Optimal Asymmetric Encryption Padding) con l'algoritmo di hash SHA256.</li>
+  <li>Stampa i dati crittografati.</li>
+  <li>Decrittografa i dati utilizzando la chiave privata. Viene utilizzato lo stesso padding OAEP con l'algoritmo di hash SHA256.</li>
+  <li>Stampa i dati decrittografati.</li>
+</ul>
+     <div class="code-editor">
+      <pre><code class="language-python">
+      from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization, hashes
+from cryptography.hazmat.primitives.asymmetric import padding
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+# Genera una coppia di chiavi RSA
+private_key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=2048
+)
+public_key = private_key.public_key()
+
+# Converti la chiave privata in formato PEM
+pem_private_key = private_key.private_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PrivateFormat.PKCS8,
+    encryption_algorithm=serialization.NoEncryption()
+)
+
+# Converti la chiave pubblica in formato PEM
+pem_public_key = public_key.public_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PublicFormat.SubjectPublicKeyInfo
+)
+
+# Dati da crittografare
+data = b"Il mio messaggio segreto"
+
+# Crittografa i dati utilizzando la chiave pubblica
+encrypted_data = public_key.encrypt(
+    data,
+    padding.OAEP(
+        mgf=padding.MGF1(algorithm=hashes.SHA256()),
+        algorithm=hashes.SHA256(),
+        label=None
+    )
+)
+
+print("Dati crittografati:", encrypted_data)
+
+# Decrittografa i dati utilizzando la chiave privata
+decrypted_data = private_key.decrypt(
+    encrypted_data,
+    padding.OAEP(
+        mgf=padding.MGF1(algorithm=hashes.SHA256()),
+        algorithm=hashes.SHA256(),
+        label=None
+    )
+)
+
+print("Dati decrittografati:", decrypted_data)
+      
+      
+      
+      
+      
+      </div>/body><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script></html>
