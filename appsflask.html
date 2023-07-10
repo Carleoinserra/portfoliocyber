@@ -4,69 +4,107 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagina HTML con codice Flask</title>
+  <style>
+    .code-editor {
+      background-color: #f5f5f5;
+      padding: 10px;
+      overflow: auto;
+    }
+  </style>
 </head>
 <body>
   <h1>Pagina HTML con codice Flask</h1>
 
-  <p>Di seguito è riportato un esempio di codice Python Flask con un paragrafo di commento:</p>
+  <p>Di seguito è riportato il primo programma Python Flask con un paragrafo di commento:</p>
 
-  <pre>
-    <code>
-      from flask import Flask, request, make_response, render_template, session
-      from datetime import datetime
+  <div class="code-editor">
+    <pre>
+      <code>
+        from flask import Flask, request, make_response, render_template
 
-      app = Flask(__name__)
-      app.secret_key = 'supersecretkey'  # Chiave segreta per firmare la sessione
+        app = Flask(__name__)
 
-      @app.route('/')
-      def index():
-          username = session.get('username')
-          last_access = session.get('last_access')
-          if username:
-              return f'Ciao {username}! Ultimo accesso: {last_access}'
-          else:
-              return render_template('login.html')
+        @app.route('/')
+        def index():
+            username = request.cookies.get('username')
+            if username:
+                return f'Ciao {username}! Benvenuto di nuovo.'
+            else:
+                return render_template('login.html')
 
-      @app.route('/login', methods=['POST'])
-      def login():
-          username = request.form.get('username')
-          if username:
-              session['username'] = username
-              session['last_access'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-              return f'Login effettuato come {username}.'
-          else:
-              return 'Nome utente mancante. Impossibile effettuare il login.'
+        @app.route('/login', methods=['POST'])
+        def login():
+            username = request.form.get('username')
+            if username:
+                response = make_response(f'Login effettuato come {username}.')
+                response.set_cookie('username', username)
+                return response
+            else:
+                return 'Nome utente mancante. Impossibile effettuare il login.'
 
-      @app.route('/logout')
-      def logout():
-          session.pop('username', None)
-          session.pop('last_access', None)
-          return 'Logout effettuato.'
+        @app.route('/logout')
+        def logout():
+            response = make_response('Logout effettuato.')
+            response.set_cookie('username', '', expires=0)
+            return response
 
-      # Questo codice Flask crea una semplice applicazione web con
-      # tre rotte principali: '/' per la pagina principale, '/login'
-      # per effettuare il login e '/logout' per effettuare il logout.
-      # L'applicazione utilizza le sessioni per memorizzare l'username
-      # dell'utente e l'ultima volta in cui è stato effettuato l'accesso.
+        # Questo codice Flask crea un'applicazione web con una rotta '/'
+        # che restituisce un messaggio di benvenuto all'utente se il
+        # cookie 'username' è presente. In caso contrario, reindirizza
+        # all'HTML di login.
 
-      if __name__ == '__main__':
-          app.run()
-    </code>
-  </pre>
+        if __name__ == '__main__':
+            app.run()
+      </code>
+    </pre>
+  </div>
 
-  <p>Di seguito è riportato un altro codice Python aggiuntivo con un paragrafo di commento:</p>
+  <p>Di seguito è riportato il secondo programma Python Flask con un paragrafo di commento:</p>
 
-  <pre>
-    <code>
-      # Aggiungi qui il tuo codice Python aggiuntivo
-      # per estendere la funzionalità del tuo progetto Flask.
+  <div class="code-editor">
+    <pre>
+      <code>
+        from flask import Flask, request, make_response, render_template, session
+        from datetime import datetime
 
-      # Questo codice aggiuntivo può includere altre rotte,
-      # funzioni, logica di business, integrazioni di database, ecc.
+        app = Flask(__name__)
+        app.secret_key = 'supersecretkey'  # Chiave segreta per firmare la sessione
 
-      # Assicurati di seguire la sintassi corretta di Flask
-      # e di includere eventuali dipendenze necessarie.
-    </code>
-  </pre>
+        @app.route('/')
+        def index():
+            username = session.get('username')
+            last_access = session.get('last_access')
+            if username:
+                return f'Ciao {username}! Ultimo accesso: {last_access}'
+            else:
+                return render_template('login.html')
+
+        @app.route('/login', methods=['POST'])
+        def login():
+            username = request.form.get('username')
+            if username:
+                session['username'] = username
+                session['last_access'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                return f'Login effettuato come {username}.'
+            else:
+                return 'Nome utente mancante. Impossibile effettuare il login.'
+
+        @app.route('/logout')
+        def logout():
+            session.pop('username', None)
+            session.pop('last_access', None)
+            return 'Logout effettuato.'
+
+        # Questo codice Flask crea un'applicazione web con una rotta '/'
+        # che restituisce un messaggio di benvenuto all'utente se l'username
+        # è presente nella sessione. In caso contrario, reindirizza
+        # all'HTML di login.
+
+        if __name__ == '__main__':
+            app.run()
+      </code>
+    </pre>
+  </div>
+
 </body>
 </html>
