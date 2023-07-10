@@ -31,7 +31,7 @@
     <h1>Sistemi di crittografia con l'utilizzo di Python</h1>
     <h3> Crittografia a chiave asimmetrica</h3>
 <p>
-Di seguito la spiegazione del primo programma in cui si esegue una crittografia a chiave simmetrica:
+Di seguito la spiegazione del primo programma in cui si esegue una crittografia a chiave asimmetrica:
 </p>
 
   <ul>
@@ -70,7 +70,7 @@ print("Dati decrittografati:", decrypted_data)
     </div>
   <h3> Crittografia a chiave simmetrica</h3>
     <p>
-Di seguito la spiegazione del secondo programma in cui si esegue una crittografia a chiave asimmetrica:
+Di seguito la spiegazione del secondo programma in cui si esegue una crittografia a chiave simmetrica:
 </p>  
   <ul>
   <li><strong>Importa la classe rsa dal modulo cryptography.hazmat.primitives.asymmetric.</strong> Questa classe fornisce funzionalità per la generazione di chiavi RSA.</li>
@@ -139,8 +139,37 @@ decrypted_data = private_key.decrypt(
 
 print("Dati decrittografati:", decrypted_data)
       
-      
-      
-      
-      
+       </code></pre>
+    </div>   
+<h3> Crittografia con hashing</h3>
+    <p>
+Di seguito la spiegazione del secondo programma in cui si esegue una crittografia con hashing:
+</p>  
+    <ul>
+  <li>Importa il modulo hashlib, che fornisce funzionalità per il calcolo degli hash crittografici.</li>
+  <li>Definisce una stringa di testo da cui calcolare l'hash. In questo caso, la stringa è "Ciao, mondo!".</li>
+  <li>Crea un oggetto hash utilizzando l'algoritmo SHA-256. La stringa viene convertita in una sequenza di byte utilizzando il metodo <code>encode()</code>.</li>
+  <li>Calcola l'hash della stringa utilizzando il metodo <code>hexdigest()</code> dell'oggetto hash. <code>hexdigest()</code> restituisce una rappresentazione esadecimale dell'hash calcolato.</li>
+  <li>Stampa la stringa originale.</li>
+  <li>Stampa il valore dell'hash SHA-256 calcolato.</li>
+</ul>
+       <div class="code-editor">
+      <pre><code class="language-python"> 
+import hashlib
+
+stringa = "Ciao, mondo!"
+hash_object = hashlib.sha256(stringa.encode())
+hash_value = hash_object.hexdigest()
+
+print("Stringa originale:", stringa)
+print("Valore di hash SHA-256:", hash_value)
+
+
+
+
+        
+ </code></pre>
+    </div>  
+
+        
       </div></body><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script></html>
