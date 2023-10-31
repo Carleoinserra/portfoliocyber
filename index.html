@@ -12,6 +12,17 @@
       object-fit: cover;
       border-radius: 50%;
     }
+ /* Regole CSS per il tema chiaro */
+    body {
+      background-color: #fff; /* Colore di sfondo chiaro */
+      color: #000; /* Colore del testo chiaro */
+    }
+
+    /* Regole CSS per il tema scuro (inizialmente nascoste) */
+    body.dark-mode {
+      background-color: #333; /* Colore di sfondo scuro */
+      color: #fff; /* Colore del testo scuro */
+    }    
   </style>
 </head>
 <body>
@@ -49,7 +60,7 @@
       <div class="col-md-6 order-md-1 text-center">
         <h1>Corso Cybersecurity</h1>
         <h3>Docente Carlo Inserra</h3>
-        
+        <button id="theme-toggle">Cambia tema</button>        
         <h4>Link alle dispense:</h4>
          <p>Lezione 1:</p>
         <ul>
@@ -268,5 +279,12 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+  <script>
+  const themeToggle = document.getElementById("theme-toggle");
+  const body = document.body;
+  themeToggle.addEventListener("click", () => {
+    // Alterna tra il tema chiaro e scuro aggiungendo o rimuovendo la classe "dark-mode" dal body
+    body.classList.toggle("dark-mode");
+  });
+</script></body>
 </html>
